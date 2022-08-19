@@ -1,12 +1,26 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import pencil from "../images/Pencil.svg";
 import plus from "../images/Plus.svg";
+import Card from "./Card";
+import { api } from "../utils/Api";
 
 function Main(props) {
-  // const [userAvatar, setUserAvatar] = useState("");
 
+  const [userAvatar, setUserAvatar] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userDescription, setUserDescription] = useState("");
+  const [cards, setCards] = useState([]);
 
-
+  useEffect(() => {
+    Promise.all([api.getUserInfoFromServer(), api.getInitialCardsFromServer()])
+      .then(([userData, dataCards]) => {
+        setUserName(userData.name);
+        setUserDescription(userData.about);
+        setUserAvatar(userData.avatar);
+        setCards(dataCards);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <main className="content">
@@ -20,11 +34,11 @@ function Main(props) {
               className="profile__avatar-edit-button"
               type="button"
             ></button>
-            <img src="{}" alt="аватар" className="profile__avatar" />
+            <img src={userAvatar} alt="аватар" className="profile__avatar" />
           </div>
           <div className="profile__info">
             <div className="profile__name-edit">
-              <h1 className="profile__name">Жак-Ив Кусто</h1>
+              <h1 className="profile__name">{userName}</h1>
               <button
                 type="button"
                 className="button button_type_edit"
@@ -33,7 +47,7 @@ function Main(props) {
                 <img src={pencil} alt="карандаш" />
               </button>
             </div>
-            <p className="profile__job">Исследователь океана</p>
+            <p className="profile__job">{userDescription}</p>
           </div>
         </div>
         <button
@@ -41,12 +55,19 @@ function Main(props) {
           className="button button_type_add"
           onClick={props.onAddPlace}
         >
-          <img src={plus} />
+          <img src={plus} alt="плюс"/>
         </button>
       </section>
-      <section className="cards"></section>
+      <section className="cards">
+        {cards.map((card) => (
+          <Card 
+          card={card} 
+          key={card._id} 
+          onCardClick={props.onCardClick} />
+        ))}
+      </section>
     </main>
   );
 }
 
-	export default Main;
+export default Main;
