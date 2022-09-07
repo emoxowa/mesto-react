@@ -16,17 +16,30 @@ function App() {
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
 
-  React.useEffect(() => {
-    api
-      .getUserInfoFromServer()
-      .then((res) => {
-        setCurrentUser(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+
+    useEffect(() => {
+      api
+        .getInitialCardsFromServer()
+        .then((dataCards) => {
+          setCards(dataCards);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, []);
+  
+    useEffect(() => {
+      api
+        .getUserInfoFromServer()
+        .then((res) => {
+          setCurrentUser(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, []);
 
   function handleEditAvatarClick() {
     setIsPopupAvatarOpen(true);
@@ -53,6 +66,28 @@ function App() {
     setSelectedCard(card);
   };
 
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api
+      .changeLikeStatus(isLiked, card._id)
+      .then((newCard) => {
+      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+    })
+      .catch((err) => { console.log(err) })
+  } 
+
+  function handleCardDelete(card) {
+    api
+      .deleteCardFromServer(card._id)
+      .then(() => {
+      setCards((state) => state.filter((c) => c._id !== card._id));
+    })
+      .catch((err) => { console.log(err) })
+  }
+
 
   return (
     <div className="page">
@@ -63,6 +98,9 @@ function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onCardClick={handleCardClick}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
+          cards={cards}
         />
         <Footer />
 
