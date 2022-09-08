@@ -17,11 +17,8 @@
   * CSS3 (Flexbox, адаптивная верстка, и др.) 
   * BEM
   * Javascript
-  * Объектно-ориентированное программирование (классы, модули, директивы export и import, this);
-  * Работа с формами, и их живая валидация JavaScript;
   * Работа с API (запрос и ответы);
   * Promise, асинхронные колбэки;
-  * Webpack
   * Figma
   * Pixel Perfect
   * GIT

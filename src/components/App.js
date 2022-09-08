@@ -7,6 +7,9 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import { api } from "../utils/Api";
 import CurrentUserContext from "../contexts/CurrentUserContext";
+import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 
 function App() {
@@ -89,6 +92,38 @@ function App() {
   }
 
 
+  function handleUpdateUser({ name, job }) {
+    api
+      .setUserInfoFromServer({ name, job })
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleUpdateAvatar({ avatar }) {
+     api
+       .changeUserAvatar({ avatar })
+       .then((res) => {
+         setCurrentUser(res);
+         closeAllPopups();
+       })
+       .catch((err) => console.log(err));
+   }
+
+    function handleAddPlaceSubmit({ name, link }) {
+      api
+        .setCardToServer({ name, link })
+        .then((newCard) => {
+          setCards([newCard, ...cards]);
+          closeAllPopups();
+        })
+        .catch((err) => console.log(err));
+    }
+  
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -104,86 +139,23 @@ function App() {
         />
         <Footer />
 
-        <PopupWithForm
-          name="update-avatar"
+        <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
-          title="Обновить аватар"
           onClose={closeAllPopups}
-          formName="edit"
-          buttonText="Сохранить"
-        >
-          <input
-            type="url"
-            name="avatar"
-            id="avatar-input"
-            placeholder="Ссылка на аватарку"
-            className="popup__input"
-            required
-          />
-          <span className="popup__input-error avatar-input-error"></span>
-        </PopupWithForm>
+          onUpdateAvatar={handleUpdateAvatar}
+        />
 
-        <PopupWithForm
-          name="edit"
+        <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
-          title="Редактировать профиль"
           onClose={closeAllPopups}
-          formName="edit"
-          buttonText="Сохранить"
-        >
-          <input
-            type="text"
-            name="name"
-            id="name-input"
-            className="popup__input popup__input-error_margin-bottom"
-            minLength="2"
-            maxLength="40"
-            placeholder="Имя"
-            required
-          />
-          <span className="popup__input-error"></span>
-          <input
-            type="text"
-            name="job"
-            id="job-input"
-            className="popup__input"
-            minLength="2"
-            maxLength="200"
-            placeholder="О себе"
-            required
-          />
-          <span className="popup__input-error job-input-error"></span>
-        </PopupWithForm>
+          onUpdateUser={handleUpdateUser}
+        />
 
-        <PopupWithForm
-          name="create"
+        <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
-          title="Новое место"
           onClose={closeAllPopups}
-          formName="create"
-          buttonText="Создать"
-        >
-          <input
-            type="text"
-            name="name"
-            id="place-name-input"
-            placeholder="Название"
-            className="popup__input popup__input-error_margin-bottom"
-            minLength="2"
-            maxLength="30"
-            required
-          />
-          <span className="popup__input-error"></span>
-          <input
-            type="url"
-            name="link"
-            id="link-input"
-            placeholder="Ссылка на картинку"
-            className="popup__input"
-            required
-          />
-          <span className="popup__input-error link-input-error"></span>
-        </PopupWithForm>
+          onAddPlace={handleAddPlaceSubmit}
+        />
 
         <PopupWithForm
           name="delete"
