@@ -16,7 +16,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
 
     function handleLinkChange(e) {
       setLink(e.target.value);
-  }
+    }
   
     function handleSubmit(e) {
       e.preventDefault();

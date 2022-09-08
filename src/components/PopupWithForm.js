@@ -1,7 +1,6 @@
 import React from "react";
 import closeIcon from "../images/close-icon.png";
 
-
 function PopupWithForm(props) {
   const classOpenPopup = `${props.isOpen && "popup_opened"}`;
 

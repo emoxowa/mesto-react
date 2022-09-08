@@ -11,7 +11,6 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import DeleteCardPopup from "./DeleteCardPopup";
 
-
 function App() {
   const [isEditAvatarPopupOpen, setIsPopupAvatarOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsPopupProfileOpen] = useState(false);
@@ -23,7 +22,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [cardDelete, setCardDelete] = useState({});
-
 
     useEffect(() => {
       api
@@ -47,7 +45,6 @@ function App() {
         });
     }, []);
 
-  
   function handleEditAvatarClick() {
     setIsPopupAvatarOpen(true);
   }
@@ -101,7 +98,6 @@ function App() {
     })
       .catch((err) => { console.log(err) })
   }
-
 
   function handleUpdateUser({ name, job }) {
     api
