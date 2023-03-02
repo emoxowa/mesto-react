@@ -20,6 +20,8 @@ npm install
 npm start
 ```
 
+## Project Status:
+This project is completed and is no longer being actively maintained.
 
 ## Website link
 To open the website, click on the following link 👉🏻: https://emoxowa.github.io/mesto-react/
