@@ -12,13 +12,15 @@ The objective of this project is to build an interactive web page where users ca
 
 ## Installation
 
-To run the project locally, clone the repository and run the following commands:
+To run the project locally, follow these steps:
 
-```bash
-cd mesto-react
-npm install
-npm start
-```
+1. Clone the repository using the following command: **git clone** https://github.com/emoxowa/mesto-react.git
+
+2. Install the necessary dependencies by running the following command: **npm install**
+
+3. Run the project by running the following command: **npm start**
+
+The project will be available at http://localhost:3000/
 
 ## Project Status:
 This project is completed and is no longer being actively maintained.
