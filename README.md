@@ -10,6 +10,17 @@ The objective of this project is to build an interactive web page where users ca
 - HTML5
 - CSS3
 
+## Installation
+
+To run the project locally, clone the repository and run the following commands:
+
+```bash
+cd mesto-react
+npm install
+npm start
+```
+
+
 ## Website link
 To open the website, click on the following link 👉🏻: https://emoxowa.github.io/mesto-react/
 
