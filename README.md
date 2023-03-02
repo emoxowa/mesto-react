@@ -1,29 +1,18 @@
-# Проектная работа "Место-реакт" (Яндекс Практикум - Курс "Веб-разработчик")
+# 📚 Educational project: "Mesto-React"
 
-С проектом можно ознакомиться перейдя по ссылке: https://emoxowa.github.io/mesto-react/
+## Introduction 
+The objective of this project is to build an interactive web page where users can upload, like, and delete photos, and change their avatars. 
 
-## Цель:
-Работа над сервисом Mesto: интерактивной страницей, выложенной на сервер, на которой можно менять аватар пользователя, добавлять и удалять фотографии, а также, ставить лайки.
+## Technologies Used
 
+- React
+- JavaScript
+- HTML5
+- CSS3
 
-Этот проект носит образовательный характер. Его цель – отработка полученных навыков.
+## Website link
+To open the website, click on the following link 👉🏻: https://emoxowa.github.io/mesto-react/
 
-------
+---
 
-## Описание:
-
-Список технологий, используемых в проекте:
-  * HTML5
-  * CSS3 (Flexbox, адаптивная верстка, и др.) 
-  * BEM
-  * Javascript
-  * Работа с API (запрос и ответы);
-  * Promise, асинхронные колбэки;
-  * Figma
-  * Pixel Perfect
-  * GIT
-  * Postman
-  * React
-
-Язык сайта: русский.
-
+<p>This project was created by <a href="https://github.com/emoxowa">Evgeniia Mokhova</a> as part of the Web Development course at <a href="https://practicum.yandex.ru/web/">Yandex.Practicum</a>.</p>
